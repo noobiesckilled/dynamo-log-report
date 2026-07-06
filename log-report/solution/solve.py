@@ -9,6 +9,7 @@ with open("/app/access.log") as f:
         if not line:
             continue
         total += 1
+
         ips.add(line.split()[0])
         m = re.search(r'"(?:GET|POST|PUT|DELETE|HEAD|PATCH) (\S+) ', line)
         if m:

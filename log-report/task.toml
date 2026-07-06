@@ -1,4 +1,4 @@
-artifacts = "/app/out.json"
+artifacts = ["/app/report.json"]
 
 [task]
 name = "dynamo/log-report"
@@ -12,9 +12,9 @@ artifact_type = ["text_or_log_file", "generated_output_artifact"]
 expert_time_estimate_hours = 0.3
 model_tested = "GPT-5.4"
 agent_tested = "Terminus-2"
-difficulty_explanation = "Parse a small access log and emit summary stats."
-solution_explanation = "Read the log, count requests/unique IPs, find the top path."
-verification_explanation = "Check the report file."
+difficulty_explanation = "Requires parsing an Apache access log to compute total request counts, unique IP counts, and top requested paths, and outputting the summary in a strictly structured JSON file."
+solution_explanation = "Read the log file `/app/access.log` line-by-line, parse the IP and HTTP request path using regex, collect counts, and dump the metrics as JSON to `/app/report.json`."
+verification_explanation = "Verify `/app/report.json` exists, is valid JSON, contains all required keys (`total_requests`, `unique_ips`, `top_path`), and matches the exact computed metrics from the log file."
 
 [verifier]
 timeout_sec = 120.0
